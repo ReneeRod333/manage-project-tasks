@@ -32,7 +32,8 @@
             <h2 class="card-title mb-1">To Do</h2>
           </div>
           <div class="card-body bg-light">
-            <div id="todo-cards"></div>
+            <div id="todo-cards">
+            </div>
           </div>
         </div>
       </div>
@@ -63,7 +64,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Add Task</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-bs-toggle="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -88,7 +89,7 @@
               <div class="col">
                 <div class="form-group">
                   <label for="exampleFormControlTextarea1">Task Description</label>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  <textarea class="form-control" id="formControlTextarea1" rows="3" placeholder="Enter Task Description..."></textarea>
                 </div>
               </div>
             </div>
@@ -97,10 +98,9 @@
           <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
           <div class="row mx-auto">
             <div class="col">
-              <button type="button" class="btn btn-primary">Add Task</button>
+              <button type="button" id="addTaskButton" class="btn btn-primary">Add Task</button>
             </div>
           </div>
-          
         </div>
       </div>
     </div>
