@@ -42,6 +42,7 @@ function createTaskCard(task) {
     const $todoCardsContainerEl = $('#todo-cards');
     const $cardEl = $('<div class="card" style="width: 18rem;">');
     const $nextIdEl = $('<input type="hidden" class="nextId" name="nextId">');
+    console.log({task});
     $nextIdEl.val(task.id);
     const $cardBodyEl = $('<div class="card-body">');
     const $cardTitleEl = $('<h5 class="card-title"></h5>');
@@ -50,8 +51,8 @@ function createTaskCard(task) {
     $cardDescriptionEl.text(task.description);
     const $cardDueDateEl = $('<p class="due-date"></p>');
     $cardDueDateEl.text(task.dueDate);
-    const $removeButtonEl = $('<button class="btn btn-danger btn-small delete-item-btn">Remove</button>');
-    $cardBodyEl.append($cardTitleEl, $cardDescriptionEl, $cardDueDateEl, $removeButtonEl);
+    const $removeButtonEl = $('<button class="btn btn-danger btn-small removeButton delete-item-btn">Remove</button>');
+    $cardBodyEl.append($cardTitleEl, $cardDescriptionEl, $cardDueDateEl, $nextIdEl, $removeButtonEl);
     $cardEl.append($cardBodyEl);
     $todoCardsContainerEl.append($cardEl);
 }
@@ -65,7 +66,10 @@ function renderTaskList() {
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event) {
-
+    const $removeButtonEl = $(event.target);
+    console.log({event});
+    $removeButtonEl.parent().parent('.card').remove();
+    const $taskId = $removeButtonEl.siblings('input.nextId');
 }
 
 // Todo: create a function to handle dropping a task into a new status lane
@@ -80,4 +84,7 @@ $(document).ready(function () {
     
     $addTaskButton.on("click", handleAddTask);
     renderTaskList();
+    const $removeButtonsEl = $('.removeButton');
+  
+    $removeButtonsEl.on("click", handleDeleteTask);
 });
