@@ -35,12 +35,14 @@ function handleAddTask(event) {
     $dueDateInput.val('');
     $textAreaInput.val('');
     $modal.modal('hide');
+    location.reload(true);
 }
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
     const $todoCardsContainerEl = $('#todo-cards');
-    const $cardEl = $('<div class="card" style="width: 18rem;">');
+    console.log(task.dueDate)
+    const $cardEl = $('<div class="card task-card">');
     const $nextIdEl = $('<input type="hidden" class="nextId" name="nextId">');
     console.log({task});
     $nextIdEl.val(task.id);
@@ -50,6 +52,7 @@ function createTaskCard(task) {
     const $cardDescriptionEl = $('<p class="card-text"></p>');
     $cardDescriptionEl.text(task.description);
     const $cardDueDateEl = $('<p class="due-date"></p>');
+
     $cardDueDateEl.text(task.dueDate);
     const $removeButtonEl = $('<button class="btn btn-danger btn-small removeButton delete-item-btn">Remove</button>');
     $cardBodyEl.append($cardTitleEl, $cardDescriptionEl, $cardDueDateEl, $nextIdEl, $removeButtonEl);
@@ -69,22 +72,41 @@ function handleDeleteTask(event) {
     const $removeButtonEl = $(event.target);
     console.log({event});
     $removeButtonEl.parent().parent('.card').remove();
-    const $taskId = $removeButtonEl.siblings('input.nextId');
+    const $taskIdEl = $removeButtonEl.siblings('input.nextId');
+    const taskList = JSON.parse(localStorage.getItem("tasks"));
+    const filteredTaskList = taskList.filter(task => task.id !== parseInt($taskIdEl.val()));
+    localStorage.setItem("tasks", JSON.stringify(filteredTaskList));
 }
 
 // Todo: create a function to handle dropping a task into a new status lane
 function handleDrop(event, ui) {
-
+    $( this )
+    .addClass( "ui-state-highlight" )
+    .find( "p" )
+    .html( "Dropped!" );
+    
 }
+
+
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
-    
+    $( "#formControlDueDate" ).datepicker();
     const $addTaskButton = $('#addTaskButton');
-    
     $addTaskButton.on("click", handleAddTask);
     renderTaskList();
+    $( ".task-card" ).draggable({
+        snap: ".snap-lane",
+        snapMode: "inner",
+        snapTolerance: 30,
+        stack: ".task-card",
+        zIndex: 100
+    });
+    $( "#in-progress", "#to-do", "#done" ).droppable({
+        accept: ".task-card",
+        drop: handleDrop,
+      });
+      
     const $removeButtonsEl = $('.removeButton');
-  
     $removeButtonsEl.on("click", handleDeleteTask);
 });
