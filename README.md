@@ -10,7 +10,7 @@ A simple project task board application involves designing a user-friendly inter
 
 Repo Link: https://github.com/ReneeRod333/manage-project-tasks
 
-Live Link: https://reneerod333.github.io/manage-project-tasks/
+Live Link: https://reneerod333.github.io/manage-project-tasks/Develop/index
 
 
 ### Project Example
