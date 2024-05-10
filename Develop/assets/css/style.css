@@ -4,13 +4,22 @@ body {
 }
 
 .swim-lanes {
-  min-height: 60vh;
+  min-height: 100vh;
 }
 
 .task-card {
   margin: 0 auto;
+  width: 18rem;
 }
 
 .task-card:hover {
   cursor: grab;
+}
+
+.overdue {
+  background-color: red;
+}
+
+.near-deadline {
+  background-color: yellow;
 }
