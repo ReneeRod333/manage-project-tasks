@@ -15,7 +15,7 @@ Live Link: https://reneerod333.github.io/manage-project-tasks/
 
 ### Project Example
 
-![](./Develop/assets/images/task-board-screenshot.png)
+![](Develop/assets/images/task-board-screenshot.png)
 
 
 #### License
